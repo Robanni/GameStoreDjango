@@ -21,7 +21,7 @@ class GameBaseDataView(APIView):
         return Response(serializer.data)
     
 
-class GameCartListView(APIView):
+class GameCardListView(APIView):
 
     def get(self, request, format=None):
         limit = request.query_params.get('limit', None)  
