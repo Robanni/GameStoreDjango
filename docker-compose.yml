@@ -1,0 +1,27 @@
+
+services:
+  web:
+    build: .
+    command:   python manage.py runserver 0.0.0.0:8000
+    ports:
+      - "8000:8000"  # Порт для доступа к приложению
+    volumes:
+      - .:/app       # Подключение исходного кода для разработки
+    # env_file:
+    #   - .env         # Переменные окружения
+    depends_on:
+      - db           # Убедитесь, что база данных запущена перед приложением
+
+  db:
+    image: postgres:15
+    environment:
+      POSTGRES_USER: samurai     # Имя пользователя базы данных
+      POSTGRES_PASSWORD: 123  # Пароль базы данных
+      POSTGRES_DB: NFAGames        # Имя базы данных
+    ports:
+      - "5435:5432"  # Открываем порт PostgreSQL
+    volumes:
+      - pg_data:/var/lib/postgresql/data
+
+volumes:
+  pg_data:
